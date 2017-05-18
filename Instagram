@@ -1,0 +1,124 @@
+PImage img;
+PFont font;
+float imageX;
+float imageY;  
+float red;
+float green; 
+float blue; 
+float rotation;
+boolean rotate; 
+float tint; 
+boolean tintonoff; 
+PFont font2;
+boolean like;
+
+void setup() {
+    size(600, 600);
+    img = loadImage("Nba.jpg");
+   
+
+    imageX = 300;
+    imageY = 300;
+    rotation = 0;
+
+}
+    
+   void draw() {
+    background(#FFFFFF);
+      font = loadFont("HighTowerText-Reg-48.vlw");
+          textFont(font);
+              if(mousePressed){ //buttons  
+       if(mouseY > 160 && mouseY < 200 && mouseX < 120 && mouseX > 20 ){ // red tint 
+           red = 200;
+           green = 0;
+           blue = 0;
+           tintonoff = true;
+       } else if(mouseY > 230 && mouseY < 270 && mouseX < 120 && mouseX > 20){ // green tint
+           red = 0;
+           green = 200;
+           blue = 0; 
+           tintonoff = true;
+       } else if(mouseY > 300 && mouseY < 340 && mouseX < 120 && mouseX > 20){  //blue tint
+           red = 0;
+           green = 0;
+           blue = 200; 
+           tintonoff = true;
+       } else if(mouseY > 370 && mouseY < 410 && mouseX < 120 && mouseX > 20){  //purple tint 
+           red = 200;
+           green = 0;
+           blue = 200;
+           tintonoff = true;
+       } else if(mouseY > 20 && mouseY < 60 && mouseX < 120 && mouseX > 20){ //reset tint 
+           tintonoff = false;
+           imageX = 300;
+           imageY = 300;
+       }
+       if (mouseY > 90 && mouseY < 130 && mouseX < 120 && mouseX > 20 && rotate == false){
+         rotation += 90;
+         rotate = true; 
+       }
+       if(mouseY > 430 && mouseY < 460 && mouseX < 50 && mouseX > 20){
+         imageX += 1;
+         imageY += 1;
+       }
+       if(mouseY > 430 && mouseY < 460 && mouseX < 120 && mouseX > 90){
+         imageX -= 1;
+         imageY -= 1;
+       }
+      }
+     
+     rectMode(CORNER);
+   fill(#00BDFF);  
+   rect(0,0,150, height);
+     fill(255, 0, 0);
+     rect(20, 160, 100, 40);  
+     fill(0, 255, 0);
+     rect(20, 230, 100, 40);  
+     fill(0, 0, 255);
+     rect(20, 300 , 100, 40); 
+     fill(255, 0, 255);
+     rect(20, 370, 100, 40);  
+          fill(#E1EAC7);
+     rect(20, 20, 100, 40);
+         fill(#E1EAC7);
+
+
+     rect(20, 90 , 100, 40); 
+     fill(0);
+       text("Rotate",20, 125);
+     text("Reset",20, 55);
+            rectMode(CORNER);
+     strokeWeight(0);
+   
+     fill(#E1EAC7);
+     rect(20, 430, 30, 30);  
+     fill(#E1EAC7);
+     rectMode(CORNER);
+     rect(90, 430, 30, 30);  
+     fill(0);
+     rectMode(CENTER);
+     rect(35, 445, 24, 5);  
+          fill(0);
+     rectMode(CENTER);
+     rect(105, 445, 24, 5); 
+     rect(35, 445, 5, 24);  
+  font2 = loadFont("Haettenschweiler-48.vlw"); //tile font
+   textFont(font2);
+   fill(#FF9B05);
+   text("Blaine-A-Gram",250, 50);
+   
+     imageMode(CENTER); 
+     translate(width/1.8 +50, height/1.8-30);
+     rotate(radians(rotation));
+     image(img, 0, 0, imageX, imageY);
+     if(tintonoff == true){ 
+     tint(red, green, blue);
+     }else if(tintonoff == false){
+       noTint();
+     }
+  }
+    
+
+void mouseReleased() {
+  rotate = false;
+}
